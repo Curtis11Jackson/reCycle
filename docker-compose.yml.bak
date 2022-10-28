@@ -1,29 +1,8 @@
 version: "3.4"
 
 services:
-  db:
-    image: postgres
-    container_name: local_pgdb
-    restart: always
-    ports:
-      - "6032:5432"
-    environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: admin
-    volumes:
-      - local_pgdata:/var/lib/postgresql/data
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin4_container
-    restart: always
-    ports:
-      - "6081:80"
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@local.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    volumes:
-      - pgadmin-data:/var/lib/pgadmin
-
+  postgres:
+    image: "postgres:9.6"
   php:
     build:
       context: .
@@ -81,8 +60,6 @@ services:
 ###< symfony/mercure-bundle ###
 
 volumes:
-  local_pgdata:
-  pgadmin-data:
   php_socket:
   caddy_data:
   caddy_config:
